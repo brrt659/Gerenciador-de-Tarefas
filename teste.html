@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			document.getElementById("botao").addEventListener('click', function() {
+				if(typeof(Storage) !== "undefined") {
+					let nome = localStorage.getItem("nome");
+					if(nome) {
+						document.getElementById("nomeArmazenado").textContent = `O nome armazenado é: ${nome}`;
+					} else {
+						document.getElementById("nomeArmazenado").textContent = "Nenhum nome armazenado.";
+					}
+				} 
+				else {
+					alert("Navegador não suporta Web Storage!");
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<form>
+		<button type="button" id="botao">Clique para acessar o nome armazenado</button>
+	</form>
+	<p id="nomeArmazenado"></p>
+</body>
+</html>

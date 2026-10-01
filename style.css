@@ -38,6 +38,8 @@ body {
     padding: 25px;
     box-shadow: 5px 0 20px rgba(0, 0, 0, 0.08);
     transition: 0.3s;
+    display: flex;
+    flex-direction: column;
 }
 
 .menu-lateral.aberto {
@@ -81,16 +83,36 @@ body {
 }
 
 
-.lista-tarefas {
+.lista-tarefa {
 
     display: flex;
     flex-direction: column;
     gap: 12px;
+    flex: 1;
+    min-height: 0;
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
+    padding-right: 5px;
+    padding-bottom: 120px;
+
+}
+
+.lista-tarefa::-webkit-scrollbar{
+    width: 6px;
+}
+
+.lista-tarefa::-webkit-scrollbar-thumb{
+    background-color: #b8c4ae;
+    border-radius: 10px;
+}
+
+.lista-tarefa::-webkit-scrollbar-track{
+    background-color: transparent;
 }
 
 
 
-.card-tarefa {
+.card-Tarefa {
 
     background-color: #f1eee4;
     padding: 15px;
@@ -98,22 +120,49 @@ body {
     border: 1px solid #e1ddcf;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
     cursor: pointer;
+    transition: 0.2s;
 }
 
 
-.card-tarefa h3 {
+
+.card-Tarefa  h3 {
 
     font-size: 16px;
     margin-bottom: 7px;
     color: #394635;
 }
 
-
-.card-tarefa p {
+.card-Tarefa p {
 
     font-size: 13px;
     color: #777c70;
     margin-bottom: 12px;
+}
+
+.card-Tarefa .prazo,
+.card-Tarefa .prioridade{
+    font-size: 12px;
+    color: #858a7e;
+}
+
+.card-Tarefa .prioridade{
+    font-weight: bold;
+}
+
+.card-Tarefa .excluir{
+    margin-top: 8px;
+    border: none;
+    background: transparent;
+    color: #a66a6a;
+    cursor: pointer;
+    font-size: 12px;
+
+}
+
+
+
+.card-Tarefa p:last-child{
+    margin-bottom: 0;
 }
 
 
@@ -125,12 +174,13 @@ body {
     color: #a66a6a;
     cursor: pointer;
     font-size: 12px;
+
 }
 
 
 
 .opcoes-menu {
-
+    margin-top: 15px;
     position: absolute;
     bottom: 25px;
     left: 25px;
@@ -138,6 +188,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    
 }
 
 

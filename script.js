@@ -4,7 +4,11 @@ const menuLateral = document.querySelector(".menu-lateral");
 const conteudo = document.querySelector(".conteudo");
 const novaTarefa = document.querySelector(".nova-tarefa");
 const areaFormulario = document.querySelector(".area-formulario");
+const areaConcluido = document.querySelector(".area-concluido");
+const concluido = document.querySelector(".concluido");
+const listaTarefas = document.querySelector(".lista-Tarefas");
 
+const tarefas = [];
 
 botaoMenu.addEventListener("click", function() {
     menuLateral.classList.add("aberto");
@@ -16,6 +20,26 @@ fecharMenu.addEventListener("click", function() {
     conteudo.classList.remove("escondido");
     areaFormulario.classList.remove("aberto");
 });
+
+function adicionarCard(tarefa) {
+    const card = document.createElement("div");
+    card.classList.add("card-Tarefa");
+
+    card.innerHTML = `
+        <h3>${tarefa.titulo}</h3>
+        <p>${tarefa.descricao}</p>
+        <p>Prioridade: ${tarefa.prioridade}</p>
+        <p>Prazo: ${tarefa.prazo}</p>
+        <button class="excluir"> X </button>
+    `;
+    
+    const botaoExcluir = card.querySelector(".excluir");
+    botaoExcluir.addEventListener("click", function(){
+        card.remove();
+    });
+
+    listaTarefas.appendChild(card);
+}
 
 novaTarefa.addEventListener("click", function() {
 
@@ -84,17 +108,48 @@ novaTarefa.addEventListener("click", function() {
         </form>
     `;
 
+
     areaFormulario.classList.add("aberto");
+
     const formulario = document.querySelector(".formulario-tarefa");
+
     formulario.addEventListener("submit", function(event) {
         event.preventDefault();
-        console.log("Formulário enviado!");
 
+        const titulo = formulario.querySelector("#titulo").value;
+        const descricao = formulario.querySelector("#descricao").value;
+        const passos = formulario.querySelector("#passos").value;
+        const prazo = formulario.querySelector("#prazo").value;
+        const prioridade = formulario.querySelector("#prioridade").value;
+
+        const tarefa = {
+            titulo: titulo,
+            descricao: descricao,
+            passos: passos,
+            prazo: prazo,
+            prioridade: prioridade
+        };
+
+        tarefas.push(tarefa);
+
+        adicionarCard(tarefa);
+
+        console.log(tarefas);
+
+        formulario.reset();
+        areaFormulario.classList.remove("aberto");
     });
 
     document.querySelector("#cancelar-tarefa").addEventListener("click", function() {
         areaFormulario.classList.remove("aberto");
-
     });
+});
 
+
+
+
+
+areaConcluido.addEventListener("click", function() {
+    areaConcluido.classList.add("aberto");
+    concluido.classList.add("escondido");
 });
