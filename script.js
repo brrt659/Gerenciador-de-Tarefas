@@ -7,6 +7,10 @@ const listaTarefas = document.querySelector(".lista-Tarefas");
 const detalhesTarefa = document.querySelector(".detalhes-tarefa");
 const mensagemInicial = document.querySelector(".mensagem-inicial");
 const tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+const tarefasConcluidas = JSON.parse(localStorage.getItem("tarefasConcluidas")) || [];
+const botaoConcluidas = document.querySelector(".botao-concluidas");
+const tituloLista = document.querySelector(".titulo-lista");
+let modoLista = "tarefas";
 
 tarefas.forEach(function(tarefa) {
 
@@ -48,21 +52,25 @@ fecharMenu.addEventListener("click", function() {
 function abrirDetalhes(tarefa) {
     mensagemInicial.classList.add("escondido");
     detalhesTarefa.classList.add("aberto");
+
     const totalPassos = tarefa.passos.length;
+
     const passosConcluidos = tarefa.passos.filter(function(passo) {
         return passo.concluido;
     }).length;
-
 
     const porcentagem = totalPassos === 0
         ? 0
         : Math.round((passosConcluidos / totalPassos) * 100);
 
+    const tarefaConcluida = porcentagem === 100;
 
     detalhesTarefa.innerHTML = `
         <div class="detalhes-conteudo">
+
             <div class="cabecalho-detalhes">
                 <h2>${tarefa.titulo}</h2>
+
                 <span class="porcentagem">
                     ${porcentagem}%
                 </span>
@@ -72,7 +80,6 @@ function abrirDetalhes(tarefa) {
                 <strong>Descrição:</strong><br>
                 ${tarefa.descricao}
             </p>
-
 
             <p>
                 <strong>Prioridade:</strong>
@@ -91,22 +98,37 @@ function abrirDetalhes(tarefa) {
                 ${
                     tarefa.passos.length === 0
                     ? `<p>Nenhum passo cadastrado.</p>`
+
                     : tarefa.passos.map(function(passo, indice) {
+
                         return `
                             <label class="passo">
+
                                 <input
                                     type="checkbox"
                                     data-indice="${indice}"
                                     ${passo.concluido ? "checked" : ""}
                                 >
+
                                 <span>
                                     ${passo.texto}
                                 </span>
+
                             </label>
                         `;
+
                     }).join("")
                 }
+
             </div>
+
+            <button
+                class="botao-concluir ${tarefaConcluida ? "liberado" : ""}"
+                ${tarefaConcluida ? "" : "disabled"}
+            >
+                ✓ Concluir tarefa
+            </button>
+
         </div>
     `;
 
@@ -114,18 +136,69 @@ function abrirDetalhes(tarefa) {
         detalhesTarefa.querySelectorAll(".passo input");
 
     checkboxes.forEach(function(checkbox) {
+
         checkbox.addEventListener("change", function() {
+
             const indice =
                 Number(checkbox.dataset.indice);
+
             tarefa.passos[indice].concluido =
                 checkbox.checked;
+
             localStorage.setItem(
                 "tarefas",
                 JSON.stringify(tarefas)
             );
+
             abrirDetalhes(tarefa);
+
         });
+
     });
+
+    const botaoConcluir =
+        detalhesTarefa.querySelector(".botao-concluir");
+
+    if (tarefaConcluida) {
+
+        botaoConcluir.addEventListener("click", function() {
+
+            const indice =
+                tarefas.indexOf(tarefa);
+
+            if (indice !== -1) {
+                tarefas.splice(indice, 1);
+            }
+
+            tarefasConcluidas.push(tarefa);
+
+            localStorage.setItem(
+                "tarefas",
+                JSON.stringify(tarefas)
+            );
+
+            localStorage.setItem(
+                "tarefasConcluidas",
+                JSON.stringify(tarefasConcluidas)
+            );
+
+            const cards =
+                document.querySelectorAll(".card-Tarefa");
+
+            cards.forEach(function(card) {
+
+                if (card.querySelector("h3").textContent === tarefa.titulo) {
+                    card.remove();
+                }
+
+            });
+
+            detalhesTarefa.classList.remove("aberto");
+            detalhesTarefa.innerHTML = "";
+
+        });
+
+    }
 }
 
 function adicionarCard(tarefa) {
@@ -171,6 +244,7 @@ tarefas.forEach(function(tarefa) {
 });
 
 novaTarefa.addEventListener("click", function() {
+    mostrarTarefas();
     areaFormulario.innerHTML = `
         <form class="formulario-tarefa">
             <h3>Nova tarefa</h3>
@@ -299,11 +373,14 @@ novaTarefa.addEventListener("click", function() {
     };
 
     tarefas.push(tarefa);
-    localStorage.setItem("tarefas", JSON.stringify(tarefas));
 
+localStorage.setItem("tarefas",JSON.stringify(tarefas));
+
+if (modoLista === "tarefas") {
     adicionarCard(tarefa);
+}
 
-    formulario.reset();
+formulario.reset();
 
     areaFormulario.classList.remove("aberto");
 
@@ -312,4 +389,215 @@ novaTarefa.addEventListener("click", function() {
     document.querySelector("#cancelar-tarefa").addEventListener("click", function() {
     areaFormulario.classList.remove("aberto");
     });
+});
+
+function mostrarTarefas() {
+
+    modoLista = "tarefas";
+
+    listaTarefas.innerHTML = "";
+
+    tituloLista.textContent = "";
+
+    novaTarefa.style.display = "block";
+
+    botaoConcluidas.textContent =
+        "✓ Tarefas concluídas";
+
+    tarefas.forEach(function(tarefa) {
+
+        adicionarCard(tarefa);
+
+    });
+}
+
+function mostrarTarefasConcluidas() {
+
+    modoLista = "concluidas";
+
+    listaTarefas.innerHTML = "";
+
+    tituloLista.textContent =
+        "Tarefas concluídas";
+
+    novaTarefa.style.display = "none";
+
+    botaoConcluidas.textContent =
+        "← Tarefas pendentes";
+
+
+    if (tarefasConcluidas.length === 0) {
+
+        const mensagem =
+            document.createElement("p");
+
+        mensagem.textContent =
+            "Nenhuma tarefa concluída ainda.";
+
+        mensagem.style.color = "#777c70";
+        mensagem.style.fontSize = "14px";
+
+        listaTarefas.appendChild(mensagem);
+
+        return;
+    }
+
+
+    tarefasConcluidas.forEach(function(tarefa) {
+
+        const card =
+            document.createElement("div");
+
+        card.classList.add("card-Tarefa");
+
+        card.innerHTML = `
+            <h3>✓ ${tarefa.titulo}</h3>
+
+            <p>${tarefa.descricao}</p>
+
+            <p>
+                Prioridade: ${tarefa.prioridade}
+            </p>
+
+            <p>
+                Prazo: ${tarefa.prazo}
+            </p>
+
+            <button class="excluir">
+                X
+            </button>
+        `;
+
+
+        // ABRIR DETALHES
+
+        card.addEventListener("click", function() {
+
+            abrirDetalhes(tarefa);
+
+        });
+
+
+        // EXCLUIR TAREFA CONCLUÍDA
+
+        const botaoExcluir =
+            card.querySelector(".excluir");
+
+        botaoExcluir.addEventListener("click", function(event) {
+
+            event.stopPropagation();
+
+            const indice =
+                tarefasConcluidas.indexOf(tarefa);
+
+            if (indice !== -1) {
+
+                tarefasConcluidas.splice(indice, 1);
+
+            }
+
+            localStorage.setItem(
+                "tarefasConcluidas",
+                JSON.stringify(tarefasConcluidas)
+            );
+
+            card.remove();
+
+            detalhesTarefa.classList.remove("aberto");
+
+            detalhesTarefa.innerHTML = "";
+
+        });
+
+
+        listaTarefas.appendChild(card);
+
+    });
+
+
+        return;
+    }
+
+
+    tarefasConcluidas.forEach(function(tarefa) {
+
+        const card =
+            document.createElement("div");
+
+        card.classList.add("card-Tarefa");
+
+        card.innerHTML = `
+            <h3>✓ ${tarefa.titulo}</h3>
+
+            <p>${tarefa.descricao}</p>
+
+            <p>
+                Prioridade: ${tarefa.prioridade}
+            </p>
+
+            <p>
+                Prazo: ${tarefa.prazo}
+            </p>
+        `;
+
+
+        card.addEventListener("click", function() {
+
+            abrirDetalhes(tarefa);
+
+        });
+
+
+        listaTarefas.appendChild(card);
+
+    });
+
+
+
+    tarefasConcluidas.forEach(function(tarefa) {
+
+        const card =
+            document.createElement("div");
+
+        card.classList.add("card-Tarefa");
+
+        card.innerHTML = `
+            <h3>✓ ${tarefa.titulo}</h3>
+
+            <p>${tarefa.descricao}</p>
+
+            <p>
+                Prioridade: ${tarefa.prioridade}
+            </p>
+
+            <p>
+                Prazo: ${tarefa.prazo}
+            </p>
+        `;
+
+
+        card.addEventListener("click", function() {
+
+            abrirDetalhes(tarefa);
+
+        });
+
+
+        listaTarefas.appendChild(card);
+
+    });
+
+
+botaoConcluidas.addEventListener("click", function() {
+
+    if (modoLista === "tarefas") {
+
+        mostrarTarefasConcluidas();
+
+    } else {
+
+        mostrarTarefas();
+
+    }
+
 });
