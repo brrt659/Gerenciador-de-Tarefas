@@ -10,6 +10,7 @@ const tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
 const tarefasConcluidas = JSON.parse(localStorage.getItem("tarefasConcluidas")) || [];
 const botaoConcluidas = document.querySelector(".botao-concluidas");
 const tituloLista = document.querySelector(".titulo-lista");
+
 let modoLista = "tarefas";
 
 tarefas.forEach(function(tarefa) {
@@ -76,6 +77,10 @@ function abrirDetalhes(tarefa) {
                 </span>
             </div>
 
+             <p>
+                <strong>Categoria:</strong><br>
+                ${tarefa.categoria}
+            </p>
             <p>
                 <strong>Descrição:</strong><br>
                 ${tarefa.descricao}
@@ -132,9 +137,7 @@ function abrirDetalhes(tarefa) {
         </div>
     `;
 
-    const checkboxes =
-        detalhesTarefa.querySelectorAll(".passo input");
-
+    const checkboxes = detalhesTarefa.querySelectorAll(".passo input");
     checkboxes.forEach(function(checkbox) {
 
         checkbox.addEventListener("change", function() {
@@ -207,6 +210,7 @@ function adicionarCard(tarefa) {
     card.innerHTML = `
 
         <h3>${tarefa.titulo}</h3>
+        <p>${tarefa.categoria}</p>
         <p>${tarefa.descricao}</p>
         <p>Prioridade: ${tarefa.prioridade}</p>
         <p>Prazo: ${tarefa.prazo}</p>
@@ -257,6 +261,17 @@ novaTarefa.addEventListener("click", function() {
                 id="titulo"
                 name="titulo"
                 placeholder="Título da tarefa"
+                required
+            >
+            <label for="categoria">
+                categoria
+            </label>
+
+            <input
+                type="text"
+                id="categoria"
+                name="categoria"
+                placeholder="categoria da tarefa"
                 required
             >
             <label for="descricao">
@@ -345,6 +360,7 @@ novaTarefa.addEventListener("click", function() {
         event.preventDefault();
 
     const titulo = formulario.querySelector("#titulo").value;
+    const categoria = formulario.querySelector("#categoria").value;
     const descricao = formulario.querySelector("#descricao").value;
     const passosTexto = formulario.querySelector("#passos").value;
     const passos = passosTexto
@@ -366,6 +382,7 @@ novaTarefa.addEventListener("click", function() {
      const prioridade = formulario.querySelector("#prioridade").value;
      const tarefa = {
             titulo: titulo,
+            categoria: categoria,
             descricao: descricao,
             passos: passos,
             prazo: prazo,
@@ -396,14 +413,9 @@ function mostrarTarefas() {
     modoLista = "tarefas";
 
     listaTarefas.innerHTML = "";
-
     tituloLista.textContent = "";
-
     novaTarefa.style.display = "block";
-
-    botaoConcluidas.textContent =
-        "✓ Tarefas concluídas";
-
+    botaoConcluidas.textContent = "✓ Tarefas concluídas";
     tarefas.forEach(function(tarefa) {
 
         adicionarCard(tarefa);
@@ -414,17 +426,11 @@ function mostrarTarefas() {
 function mostrarTarefasConcluidas() {
 
     modoLista = "concluidas";
-
     listaTarefas.innerHTML = "";
-
     tituloLista.textContent =
         "Tarefas concluídas";
-
     novaTarefa.style.display = "none";
-
-    botaoConcluidas.textContent =
-        "← Tarefas pendentes";
-
+    botaoConcluidas.textContent ="← Tarefas pendentes";
 
     if (tarefasConcluidas.length === 0) {
 
@@ -453,15 +459,13 @@ function mostrarTarefasConcluidas() {
         card.innerHTML = `
             <h3>✓ ${tarefa.titulo}</h3>
 
+            <p>${tarefa.categoria}</p>
+
             <p>${tarefa.descricao}</p>
 
-            <p>
-                Prioridade: ${tarefa.prioridade}
-            </p>
+            <p> Prioridade: ${tarefa.prioridade}</p>
 
-            <p>
-                Prazo: ${tarefa.prazo}
-            </p>
+            <p>Prazo: ${tarefa.prazo}</p>
 
             <button class="excluir">
                 X
@@ -469,16 +473,12 @@ function mostrarTarefasConcluidas() {
         `;
 
 
-        // ABRIR DETALHES
-
         card.addEventListener("click", function() {
 
             abrirDetalhes(tarefa);
 
         });
 
-
-        // EXCLUIR TAREFA CONCLUÍDA
 
         const botaoExcluir =
             card.querySelector(".excluir");
@@ -518,76 +518,6 @@ function mostrarTarefasConcluidas() {
         return;
     }
 
-
-    tarefasConcluidas.forEach(function(tarefa) {
-
-        const card =
-            document.createElement("div");
-
-        card.classList.add("card-Tarefa");
-
-        card.innerHTML = `
-            <h3>✓ ${tarefa.titulo}</h3>
-
-            <p>${tarefa.descricao}</p>
-
-            <p>
-                Prioridade: ${tarefa.prioridade}
-            </p>
-
-            <p>
-                Prazo: ${tarefa.prazo}
-            </p>
-        `;
-
-
-        card.addEventListener("click", function() {
-
-            abrirDetalhes(tarefa);
-
-        });
-
-
-        listaTarefas.appendChild(card);
-
-    });
-
-
-
-    tarefasConcluidas.forEach(function(tarefa) {
-
-        const card =
-            document.createElement("div");
-
-        card.classList.add("card-Tarefa");
-
-        card.innerHTML = `
-            <h3>✓ ${tarefa.titulo}</h3>
-
-            <p>${tarefa.descricao}</p>
-
-            <p>
-                Prioridade: ${tarefa.prioridade}
-            </p>
-
-            <p>
-                Prazo: ${tarefa.prazo}
-            </p>
-        `;
-
-
-        card.addEventListener("click", function() {
-
-            abrirDetalhes(tarefa);
-
-        });
-
-
-        listaTarefas.appendChild(card);
-
-    });
-
-
 botaoConcluidas.addEventListener("click", function() {
 
     if (modoLista === "tarefas") {
@@ -601,3 +531,12 @@ botaoConcluidas.addEventListener("click", function() {
     }
 
 });
+
+const modoescuro = document.querySelector(".botao-modo-escuro");
+
+modoescuro.addEventListener("click", function() {
+    console.log("BOTÃO CLICADO");
+
+    document.body.classList.toggle("modo-escuro");
+
+    console.log(document.body.classList);})

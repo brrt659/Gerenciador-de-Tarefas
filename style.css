@@ -188,6 +188,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    background-color: #faf8f1;
     
 }
 
@@ -207,6 +208,7 @@ body {
 .opcoes-menu button:hover {
     background-color: #ece9df;
 }
+
 
 .conteudo {
     padding: 75px 30px;
@@ -436,4 +438,56 @@ body {
 
 .botao-concluir.liberado:hover {
     background-color: #71876b;
+}
+
+body.modo-escuro{
+    background-color: #1e211d;
+    color: #e5e8df;
+}
+
+body.modo-escuro botao-menu{
+    background-color: #343a31;
+    color: #e5e8df;
+}
+
+body.modo-escuro menu-lateral{
+    background-color: #272b25;
+}
+
+body.modo-escuro cabecalho-menu h2{
+    color: #e5e8df;
+}
+
+body.modo-escuro fechar-menu{
+    color: #b8c0b2;
+}
+
+body.modo-escuro card-Tarefa{
+    background-color: #343932;
+    border-color: #454c42;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+body.modo-escuro card-Tarefa h3{
+    color: #e5e8df;
+}
+
+body.modo-escuro card-Tarefa p{
+    color: #e5e8df;
+}
+
+body.modo-escuro opcoes-menu{
+    color: #c5ccc0;
+}
+
+body.modo-escuro opcoes-menu button:hover{
+    background-color: #343a31;
+}
+
+body.modo-escuro conteudo h1{
+    color: #e5e8df;
+}
+
+body.modo-escuro conteudo p{
+    color: #adb5a8;
 }
