@@ -1,11 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Minhas Tarefas</title>
+
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -18,33 +23,42 @@
 
         <div class="cabecalho-menu">
 
-         <h2>Minhas tarefas</h2>
-
-         <button class="fechar-menu">
+            <h2>Minhas tarefas</h2>
+            <button class="fechar-menu">
                 ×
-         </button>
+            </button>
 
         </div>
+        
+        <button class="nova-tarefa">
+            + Nova tarefa
+        </button>
 
-        <button class="nova-tarefa">+ Nova tarefa</button>
         <div class="area-formulario"></div>
         <div class="lista-Tarefas"></div>
         <div class="opcoes-menu">
-        <button>✓ Tarefas concluídas</button>
-        <button>🌙 Modo escuro</button>
+            <button>✓ Tarefas concluídas</button>
+            <button>🌙 Modo escuro</button>
         </div>
 
     </aside>
 
-    <main class="conteudo">
 
+<main class="conteudo">
+
+    <div class="mensagem-inicial">
         <h1>Olá! 🌱</h1>
-
         <p>
-            Selecione o menu para ver suas tarefas.
+            Clique no menu para adicionar ou visualizar tarefas.
         </p>
+    </div>
+    <div class="detalhes-tarefa"></div>
 
-    </main>
-   <script src="script.js">defer</script>
+</main>
+
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
