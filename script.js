@@ -449,18 +449,21 @@ function adicionarCard(tarefa) {
 
 
 card.addEventListener("click", function() {
+
+    // Mesmo card → fecha
     if (
         detalhesTarefa.classList.contains("aberto") &&
-        detalhesTarefa.dataset.tarefaId === String(tarefa.id)
+        detalhesTarefa._tarefaAtual === tarefa
     ) {
         detalhesTarefa.classList.remove("aberto");
         detalhesTarefa.innerHTML = "";
-        detalhesTarefa.dataset.tarefaId = "";
+        detalhesTarefa._tarefaAtual = null;
         return;
     }
 
+    // Outro card → troca diretamente
     abrirDetalhes(tarefa);
-    detalhesTarefa.dataset.tarefaId = String(tarefa.id);
+    detalhesTarefa._tarefaAtual = tarefa;
 });
 
 

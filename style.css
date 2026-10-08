@@ -994,3 +994,7 @@ body.modo-escuro .categoria-selecionada {
 body.modo-escuro .titulo-painel {
     color: #f1f1f1;
 }
+
+body.modo-escuro .mensagem-inicial h1, body.modo-escuro .mensagem-inicial p{
+    color: #f1f1f1;
+}
