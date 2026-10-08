@@ -201,9 +201,7 @@ body {
 }
 
 
-/* ==============================
-   OPÇÕES DO MENU
-   ============================== */
+
 
 .opcoes-menu {
     margin-top: 15px;
@@ -212,7 +210,7 @@ body {
     left: 25px;
     right: 25px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
     background-color: #faf8f1;
 }
@@ -594,14 +592,24 @@ body.modo-escuro .opcoes-menu {
 }
 
 body.modo-escuro .botao-concluidas,
-body.modo-escuro .botao-modo-escuro {
+body.modo-escuro .botao-modo-escuro,
+body.modo-escuro .botao-excluir-tudo{
     background-color: #333333;
     color: #f1f1f1;
 }
 
+body.modo-escuro .opcoes-menu button:hover {
+    background-color: #3b3b3b;
+}
+
+
 body.modo-escuro .nova-tarefa {
     background-color: #333333;
     color: #f1f1f1;
+}
+
+body.modo-escuro .nova-tarefa :hover{
+    background-color: #3d3d3d;
 }
 
 body.modo-escuro .botao-ordenar {
