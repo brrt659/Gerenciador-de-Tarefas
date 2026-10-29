@@ -12,9 +12,6 @@ body {
 }
 
 
-/* ==============================
-   BOTÃO DO MENU
-   ============================== */
 
 .botao-menu {
     position: fixed;
@@ -32,9 +29,6 @@ body {
 }
 
 
-/* ==============================
-   MENU LATERAL
-   ============================== */
 
 .menu-lateral {
     position: fixed;
@@ -75,9 +69,6 @@ body {
 }
 
 
-/* ==============================
-   BOTÃO NOVA TAREFA
-   ============================== */
 
 .nova-tarefa {
     width: 100%;
@@ -92,9 +83,6 @@ body {
 }
 
 
-/* ==============================
-   BOTÃO FILTRAR / ORDENAR
-   ============================== */
 
 .botao-ordenar {
     width: 100%;
@@ -112,10 +100,6 @@ body {
     background-color: #cfdac4;
 }
 
-
-/* ==============================
-   LISTA DE TAREFAS
-   ============================== */
 
 .lista-Tarefas {
     display: flex;
@@ -142,10 +126,6 @@ body {
     background-color: transparent;
 }
 
-
-/* ==============================
-   CARDS
-   ============================== */
 
 .card-Tarefa {
     background-color: #f1eee4;
@@ -200,9 +180,6 @@ body {
     font-size: 12px;
 }
 
-
-
-
 .opcoes-menu {
     margin-top: 15px;
     position: absolute;
@@ -229,10 +206,6 @@ body {
     background-color: #ece9df;
 }
 
-
-/* ==============================
-   ÁREA PRINCIPAL
-   ============================== */
 
 .conteudo {
     padding: 75px 30px;
@@ -262,10 +235,6 @@ body {
 }
 
 
-/* ==============================
-   FORMULÁRIO
-   ============================== */
-
 .formulario-tarefa {
     display: flex;
     flex-direction: column;
@@ -286,7 +255,15 @@ body {
     color: #3e4639;
 }
 
-.criar-tarefa {
+.formulario-tarefa label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #3e4639;
+    gap: calc(0.5rem);
+}
+
+.salvar-tarefa {
     width: 100%;
     margin-top: 15px;
     padding: 14px 20px;
@@ -301,18 +278,20 @@ body {
     transition: 0.2s;
 }
 
-.criar-tarefa:hover {
+.salvar-tarefa:hover {
     background-color: #71876b;
     transform: translateY(-2px);
     box-shadow: 0 7px 15px rgba(0, 0, 0, 0.12);
 }
 
-.criar-tarefa:active {
+.salvar-tarefa:active {
     transform: translateY(0);
 }
 
-#cancelar-tarefa {
+.cancelar-tarefa {
     padding: 10px;
+    width: 100%;
+    margin-top: 15px;
     border: none;
     border-radius: 10px;
     background-color: transparent;
@@ -322,15 +301,11 @@ body {
     transition: 0.2s;
 }
 
-#cancelar-tarefa:hover {
+.cancelar-tarefa:hover {
     background-color: #ece9df;
     color: #4f584b;
 }
 
-
-/* ==============================
-   ÁREA DO FORMULÁRIO
-   ============================== */
 
 .area-formulario {
     position: fixed;
@@ -369,10 +344,6 @@ body {
     background-color: #aaaaaa;
 }
 
-
-/* ==============================
-   CARD DE DETALHES
-   ============================== */
 
 .detalhes-tarefa {
     display: none;
@@ -432,11 +403,6 @@ body {
 }
 
 
-
-/* ==============================
-   PASSOS
-   ============================== */
-
 .lista-passos {
     display: flex;
     flex-direction: column;
@@ -480,11 +446,7 @@ body {
 }
 
 
-/* ==============================
-   BOTÃO CONCLUIR
-   ============================== */
-
-.botao-concluir {
+.concluir-tarefa {
     width: 100%;
     margin-top: 20px;
     padding: 12px;
@@ -498,20 +460,16 @@ body {
     transition: 0.2s;
 }
 
-.botao-concluir.liberado {
+.concluir-tarefa.liberado {
     background-color: #8fa889;
     color: white;
     cursor: pointer;
 }
 
-.botao-concluir.liberado:hover {
+.concluir-tarefa.liberado:hover {
     background-color: #71876b;
 }
 
-
-/* ==============================
-   PAINEL DE FILTRO
-   ============================== */
 
 .painel-ordenar {
     display: none;
@@ -532,8 +490,6 @@ body {
 }
 
 
-/* BOTÕES DO FILTRO */
-
 .painel-ordenar button {
     width: 100%;
     padding: 9px 12px;
@@ -551,8 +507,6 @@ body {
 }
 
 
-/* TÍTULOS DO FILTRO */
-
 .titulo-filtro {
     padding: 8px 12px 4px;
     font-size: 11px;
@@ -561,10 +515,6 @@ body {
     color: #777;
 }
 
-
-/* ==============================
-   MODO ESCURO
-   ============================== */
 
 body.modo-escuro {
     background-color: #1a1a1a;
@@ -593,7 +543,7 @@ body.modo-escuro .opcoes-menu {
 
 body.modo-escuro .botao-concluidas,
 body.modo-escuro .botao-modo-escuro,
-body.modo-escuro .botao-excluir-tudo{
+body.modo-escuro .botao-excluir-tudo {
     background-color: #333333;
     color: #f1f1f1;
 }
@@ -602,13 +552,12 @@ body.modo-escuro .opcoes-menu button:hover {
     background-color: #3b3b3b;
 }
 
-
 body.modo-escuro .nova-tarefa {
     background-color: #333333;
     color: #f1f1f1;
 }
 
-body.modo-escuro .nova-tarefa :hover{
+body.modo-escuro .nova-tarefa:hover {
     background-color: #3d3d3d;
 }
 
@@ -621,8 +570,6 @@ body.modo-escuro .botao-ordenar:hover {
     background-color: #3d3d3d;
 }
 
-
-/* CARDS NO MODO ESCURO */
 
 body.modo-escuro .card-Tarefa {
     background-color: #2b2b2b;
@@ -641,8 +588,6 @@ body.modo-escuro .card-Tarefa .excluir {
     color: #ff8a8a;
 }
 
-
-/* DETALHES NO MODO ESCURO */
 
 body.modo-escuro .detalhes-tarefa {
     background-color: #222222;
@@ -666,8 +611,6 @@ body.modo-escuro .detalhes-conteudo p {
 }
 
 
-/* PASSOS NO MODO ESCURO */
-
 body.modo-escuro .passo {
     background-color: #333333;
     color: #f1f1f1;
@@ -677,8 +620,6 @@ body.modo-escuro .passo span {
     color: #f1f1f1;
 }
 
-
-/* FORMULÁRIO NO MODO ESCURO */
 
 body.modo-escuro .area-formulario {
     background-color: #222222;
@@ -714,8 +655,6 @@ body.modo-escuro .formulario-tarefa button {
 }
 
 
-/* SCROLLBAR DO FORMULÁRIO - MODO ESCURO */
-
 body.modo-escuro .area-formulario::-webkit-scrollbar {
     width: 8px;
 }
@@ -734,8 +673,6 @@ body.modo-escuro .area-formulario::-webkit-scrollbar-thumb:hover {
 }
 
 
-/* PAINEL DE FILTRO - MODO ESCURO */
-
 body.modo-escuro .painel-ordenar {
     background-color: #1d1d1d;
 }
@@ -752,9 +689,6 @@ body.modo-escuro .titulo-filtro {
     color: #999999;
 }
 
-/* ==============================
-   PAINEL DE FILTRO / RESUMO
-   ============================== */
 
 .painel-ordenar {
     display: none;
@@ -783,10 +717,6 @@ body.modo-escuro .titulo-filtro {
 }
 
 
-/* ==============================
-   TÍTULOS
-   ============================== */
-
 .titulo-filtro {
     padding: 5px 0 7px;
 
@@ -798,10 +728,6 @@ body.modo-escuro .titulo-filtro {
     color: #777c70;
 }
 
-
-/* ==============================
-   BOTÕES DO FILTRO
-   ============================== */
 
 .painel-ordenar button {
     width: 100%;
@@ -829,10 +755,6 @@ body.modo-escuro .titulo-filtro {
 }
 
 
-/* ==============================
-   CATEGORIAS
-   ============================== */
-
 .botao-categoria {
     display: flex;
 
@@ -853,10 +775,6 @@ body.modo-escuro .titulo-filtro {
 }
 
 
-/* ==============================
-   DIVISÓRIA
-   ============================== */
-
 .divisoria-filtro {
     width: 100%;
 
@@ -868,10 +786,6 @@ body.modo-escuro .titulo-filtro {
 }
 
 
-/* ==============================
-   RESUMO
-   ============================== */
-
 .resumo-filtro {
     display: flex;
 
@@ -881,7 +795,6 @@ body.modo-escuro .titulo-filtro {
 
     padding-top: 2px;
 }
-
 
 .linha-resumo {
     display: flex;
@@ -896,7 +809,6 @@ body.modo-escuro .titulo-filtro {
     color: #777c70;
 }
 
-
 .linha-resumo strong {
     color: #3e4639;
 
@@ -905,10 +817,6 @@ body.modo-escuro .titulo-filtro {
     font-weight: 600;
 }
 
-
-/* ==============================
-   CATEGORIA SELECIONADA
-   ============================== */
 
 .categoria-selecionada {
     margin-bottom: 5px;
@@ -921,10 +829,6 @@ body.modo-escuro .titulo-filtro {
 }
 
 
-/* ==============================
-   MODO ESCURO
-   ============================== */
-
 body.modo-escuro .painel-ordenar {
     background-color: #222222;
 
@@ -933,49 +837,37 @@ body.modo-escuro .painel-ordenar {
     color: #f1f1f1;
 }
 
-
 body.modo-escuro .titulo-filtro {
     color: #999999;
 }
-
 
 body.modo-escuro .painel-ordenar button {
     color: #eeeeee;
 }
 
-
 body.modo-escuro .painel-ordenar button:hover {
     background-color: #2d2d2d;
 }
-
 
 body.modo-escuro .quantidade-filtro {
     color: #999999;
 }
 
-
 body.modo-escuro .divisoria-filtro {
     background-color: #333333;
 }
-
 
 body.modo-escuro .linha-resumo {
     color: #aaaaaa;
 }
 
-
 body.modo-escuro .linha-resumo strong {
     color: #f1f1f1;
 }
 
-
 body.modo-escuro .categoria-selecionada {
     color: #a5b89f;
 }
-
-/* ==============================
-   CABEÇALHO DO CARD DE DETALHES
-   ============================== */
 
 
 .cabecalho-painel {
@@ -1003,6 +895,150 @@ body.modo-escuro .titulo-painel {
     color: #f1f1f1;
 }
 
-body.modo-escuro .mensagem-inicial h1, body.modo-escuro .mensagem-inicial p{
+body.modo-escuro .mensagem-inicial h1,
+body.modo-escuro .mensagem-inicial p {
+    color: #f1f1f1;
+}
+
+
+.modal-fundo {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-confirmacao {
+    width: 100%;
+    max-width: 380px;
+    padding: 25px;
+    background-color: #faf8f1;
+    border: 1px solid #e1ddcf;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    color: #3e4639;
+}
+
+.modal-confirmacao h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: #354333;
+}
+
+.modal-confirmacao p {
+    margin-bottom: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #777c70;
+}
+
+.modal-opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.modal-opcao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e1ddcf;
+    border-radius: 10px;
+    background-color: #f1eee4;
+    color: #3e4639;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modal-opcao:hover {
+    background-color: #ece9df;
+}
+
+.modal-opcao-perigo {
+    color: #a66a6a;
+}
+
+.modal-opcao:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.modal-contagem {
+    min-width: 20px;
+    font-size: 12px;
+    text-align: right;
+    color: #8b9185;
+}
+
+.modal-botoes {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.modal-cancelar {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #777c70;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modal-cancelar:hover {
+    background-color: #ece9df;
+    color: #4f584b;
+}
+
+
+body.modo-escuro .modal-confirmacao {
+    background-color: #222222;
+    border-color: #333333;
+    color: #f1f1f1;
+}
+
+body.modo-escuro .modal-confirmacao h3 {
+    color: #f1f1f1;
+}
+
+body.modo-escuro .modal-confirmacao p {
+    color: #d6d6d6;
+}
+
+body.modo-escuro .modal-opcao {
+    background-color: #333333;
+    border-color: #444444;
+    color: #f1f1f1;
+}
+
+body.modo-escuro .modal-opcao:hover {
+    background-color: #3d3d3d;
+}
+
+body.modo-escuro .modal-opcao-perigo {
+    color: #ff8a8a;
+}
+
+body.modo-escuro .modal-contagem {
+    color: #999999;
+}
+
+body.modo-escuro .modal-cancelar {
+    color: #d6d6d6;
+}
+
+body.modo-escuro .modal-cancelar:hover {
+    background-color: #333333;
     color: #f1f1f1;
 }
